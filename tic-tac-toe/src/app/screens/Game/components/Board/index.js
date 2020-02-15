@@ -5,8 +5,26 @@ import Square from '../Square';
 import styles from './styles.module.scss';
 
 class Board extends Component {
-  renderSquare() {
-    return <Square />;
+  state = {
+    squares: Array(9).fill(null)
+  };
+
+  handleClick = i => {
+    this.setState((prevState) => {
+      const squaresCopy = [...prevState.squares];
+      squaresCopy[i] = 'X';
+      return { squares: squaresCopy };
+    });
+  }
+
+  renderSquare(i) {
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={this.handleClick}
+        squareNumber={i}
+      />
+    );
   }
 
   render() {
