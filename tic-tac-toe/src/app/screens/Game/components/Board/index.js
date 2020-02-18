@@ -6,22 +6,6 @@ import Square from '../Square';
 import styles from './styles.module.scss';
 
 class Board extends Component {
-  /* state = {
-    squares: Array(9).fill(null),
-    xIsNext: true
-  };
-
-  handleClick = i => {
-    this.setState((prevState) => {
-      const squaresCopy = [...prevState.squares];
-      squaresCopy[i] = prevState.xIsNext ? 'X' : 'O';
-      return {
-        squares: squaresCopy,
-        xIsNext: !prevState.xIsNext
-      };
-    });
-  }*/
-
   renderSquare(i) {
     return (
       <Square
