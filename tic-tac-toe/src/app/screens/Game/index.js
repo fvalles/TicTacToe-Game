@@ -28,11 +28,12 @@ class Game extends Component {
     history: [{
       squares: Array(9).fill(null)
     }],
+    stepNumber: 0,
     xIsNext: true
   };
 
   handleClick = i => {
-    const history = [...this.state.history];
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squaresCopy = [...current.squares];
     if (calculateWinner(squaresCopy) || squaresCopy[i]) {
@@ -41,17 +42,25 @@ class Game extends Component {
     this.setState((prevState) => {
       squaresCopy[i] = prevState.xIsNext ? 'X' : 'O';
       return {
-        history: prevState.history.concat(
+        history: history.concat(
           { squares: squaresCopy }
         ),
-        xIsNext: !prevState.xIsNext
+        xIsNext: !prevState.xIsNext,
+        stepNumber: history.length
       };
     });
   }
 
+  jumpTo(step) {
+    this.setState(() => ({
+      stepNumber: step,
+      xIsNext: step % 2 === 0
+    }));
+  }
+
   render() {
     const history = [...this.state.history];
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
@@ -60,6 +69,8 @@ class Game extends Component {
         <li key={move.toString()}>
           <button
             type="button"
+            // eslint-disable-next-line react/jsx-no-bind
+            onClick={() => this.jumpTo(move)}
           >
             { desc }
           </button>
