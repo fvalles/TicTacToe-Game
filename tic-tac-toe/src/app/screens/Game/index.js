@@ -23,10 +23,61 @@ function calculateWinner(squares) {
   return null;
 }
 
+function calculateFilledPos(squareFilled) {
+  let row;
+  let col;
+  
+  switch (squareFilled) {
+    case 0:
+      row = 1;
+      col = 1;
+      break;
+    case 1:
+      row = 1;
+      col = 2;
+      break;
+    case 2:
+      row = 1;
+      col = 3;
+      break;
+    case 3:
+      row = 2;
+      col = 1;
+      break;
+    case 4:
+      row = 2;
+      col = 2;
+      break;
+    case 5:
+      row = 2;
+      col = 3;
+      break;
+    case 6:
+      row = 3;
+      col = 1;
+      break;
+    case 7:
+      row = 3;
+      col = 2;
+      break;
+    case 8:
+      row = 3;
+      col = 3;
+      break;
+    default:
+      row = 'An error occurred';
+      col = 'An error occurred';
+      break;
+  }
+
+  return `(row: ${row}, col: ${col})`;
+}
+
 class Game extends Component {
   state = {
     history: [{
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      squareFilled: 0,
     }],
     stepNumber: 0,
     xIsNext: true
@@ -43,7 +94,8 @@ class Game extends Component {
       squaresCopy[i] = prevState.xIsNext ? 'X' : 'O';
       return {
         history: history.concat(
-          { squares: squaresCopy }
+          { squares: squaresCopy,
+            squareFilled: i }
         ),
         xIsNext: !prevState.xIsNext,
         stepNumber: history.length
@@ -63,8 +115,10 @@ class Game extends Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((step, move) => {
-      const desc = move ? `Go to move #${move}` : 'Go to game start';
+    const moves = history.map((hisMoveDetail, move) => {
+      const squareFilled = hisMoveDetail.squareFilled;
+      const sqFilledPos = calculateFilledPos(squareFilled);
+      const desc = move ? `Go to move #${move} ${sqFilledPos}` : 'Go to game start';
       return (
         <li key={move.toString()}>
           <button
