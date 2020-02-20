@@ -6,3 +6,22 @@
 .game-info {
   margin-left: 20px;
 }
+
+.historySelectedButton {
+  @extend %button;
+  font-weight: bold;
+}
+
+.historyIdleButton {
+  @extend %button;
+}
+
+%button {
+  border: 2px solid #e7e7e7;
+  margin-top: 2px;
+  padding: 2px;
+}
+
+%button:hover {
+  background-color: #e7e7e7;
+}

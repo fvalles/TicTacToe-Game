@@ -125,6 +125,9 @@ class Game extends Component {
             type="button"
             // eslint-disable-next-line react/jsx-no-bind
             onClick={() => this.jumpTo(move)}
+            className={move === this.state.stepNumber ?
+              styles.historySelectedButton :
+              styles.historyIdleButton}
           >
             { desc }
           </button>
