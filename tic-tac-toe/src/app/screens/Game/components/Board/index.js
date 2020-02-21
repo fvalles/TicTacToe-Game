@@ -7,11 +7,14 @@ import styles from './styles.module.scss';
 
 class Board extends Component {
   renderSquare(i) {
+    const { squares, onClick, winnerSqs } = this.props;
+
     return (
       <Square
-        value={this.props.squares[i]}
-        onClick={this.props.onClick}
+        value={squares[i]}
+        onClick={onClick}
         squareNumber={i}
+        winnerSqs={winnerSqs}
         key={i.toString()}
       />
     );
@@ -53,6 +56,7 @@ class Board extends Component {
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(PropTypes.string),
+  winnerSqs: PropTypes.arrayOf(PropTypes.number),
   onClick: PropTypes.func
 };
 

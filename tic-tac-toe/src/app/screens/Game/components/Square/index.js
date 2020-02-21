@@ -9,13 +9,25 @@ class Square extends Component {
   }
 
   render() {
+    const { winnerSqs, squareNumber, value } = this.props;
+
+    const highlightSq = winnerSqs
+      ? squareNumber === winnerSqs[0] ||
+      squareNumber === winnerSqs[1] ||
+      squareNumber === winnerSqs[2]
+      : false;
+
+    const className = highlightSq
+      ? styles.squareWinner
+      : styles.square;
+
     return (
       <button
         type="button"
-        className={styles.square}
+        className={className}
         onClick={this.handleClick}
       >
-        { this.props.value }
+        { value }
       </button>
     );
   }
@@ -24,6 +36,7 @@ class Square extends Component {
 Square.propTypes = {
   squareNumber: PropTypes.number,
   value: PropTypes.string,
+  winnerSqs: PropTypes.arrayOf(PropTypes.number),
   onClick: PropTypes.func
 };
 

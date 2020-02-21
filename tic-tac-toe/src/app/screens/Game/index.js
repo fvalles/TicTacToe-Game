@@ -67,7 +67,7 @@ class Game extends Component {
 
     let status = '';
     if (winner) {
-      status = `Winner: ${winner}`;
+      status = `Winner: ${winner[0]}`;
     } else {
       status = `Next player: ${(this.state.xIsNext ? 'X' : 'O')}`;
     }
@@ -78,6 +78,7 @@ class Game extends Component {
           <Board
             squares={current.squares}
             onClick={this.handleClick}
+            winnerSqs={winner ? winner[1] : null}
           />
         </div>
         <div className={styles.gameInfo}>
@@ -102,7 +103,7 @@ class Game extends Component {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        return [squares[a], [a, b, c]];
       }
     }
     return null;
