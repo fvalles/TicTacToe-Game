@@ -9,11 +9,13 @@
 }
 
 .game {
+  align-items: center;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  height: 100%;
 }
 
-.game-info {
+.gameInfo {
   margin-left: 20px;
 }
 
