@@ -7,7 +7,7 @@ class Game extends Component {
   state = {
     history: [{
       squares: Array(9).fill(null),
-      squareFilled: 0,
+      squareFilled: 0
     }],
     stepNumber: 0,
     xIsNext: true
@@ -46,7 +46,7 @@ class Game extends Component {
     const winner = this.calculateWinner(current.squares);
 
     const moves = history.map((hisMoveDetail, move) => {
-      const squareFilled = hisMoveDetail.squareFilled;
+      const { squareFilled } = hisMoveDetail;
       const sqFilledPos = this.calculateFilledPos(squareFilled);
       const desc = move ? `Go to move #${move} ${sqFilledPos}` : 'Go to game start';
       return (
@@ -55,9 +55,9 @@ class Game extends Component {
             type="button"
             // eslint-disable-next-line react/jsx-no-bind
             onClick={() => this.jumpTo(move)}
-            className={move === this.state.stepNumber ?
-              styles.historySelectedButton :
-              styles.historyIdleButton}
+            className={move === this.state.stepNumber
+              ? styles.historySelectedButton
+              : styles.historyIdleButton}
           >
             { desc }
           </button>
@@ -109,9 +109,9 @@ class Game extends Component {
   }
 
   calculateFilledPos(squareFilled) {
-    let row;
-    let col;
-    
+    let row = 1;
+    let col = 1;
+
     switch (squareFilled) {
       case 0:
         row = 1;

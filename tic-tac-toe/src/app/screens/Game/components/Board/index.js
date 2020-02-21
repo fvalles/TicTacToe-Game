@@ -12,6 +12,7 @@ class Board extends Component {
         value={this.props.squares[i]}
         onClick={this.props.onClick}
         squareNumber={i}
+        key={i.toString()}
       />
     );
   }
@@ -25,18 +26,27 @@ class Board extends Component {
   }
 
   createBoard() {
-    let board = [];
+    const board = [];
     let sqNumber = 0;
 
     for (let row = 0; row < 3; row++) {
-      let squares = [];
+      const squares = [];
+
       for (let col = 0; col < 3; col++) {
         squares.push(this.renderSquare(sqNumber));
         sqNumber++;
       }
-      board.push(<div className={styles.boardRow}> { squares } </div>);
+
+      board.push(
+        <div
+          className={styles.boardRow}
+          key={sqNumber.toString()}
+        >
+          { squares }
+        </div>
+      );
     }
-    
+
     return board;
   }
 }
