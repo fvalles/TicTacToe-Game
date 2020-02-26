@@ -2,22 +2,33 @@
 
 $square-background: $white;
 $square-border: $dust-gray;
+$square-winner-border: #9ecaed;
 
-.square {
+%squareProps {
   background: $square-background;
   border: 1px solid $square-border;
   float: left;
-  font-size: 24px;
+  font-size: 90px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 100px;
+  height: 100px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 100px;
+}
+
+.square {
+  @extend %squareProps;
 }
 
 .square:focus {
   outline: none;
+}
+
+.squareWinner {
+  @extend %squareProps;
+  border-color: $square-winner-border;
+  box-shadow: inset 0 0 15px $square-winner-border;
 }

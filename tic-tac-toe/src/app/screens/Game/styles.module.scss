@@ -1,8 +1,29 @@
-.game {
-  display: flex;
-  flex-direction: row;
+%button {
+  border: 2px solid #e7e7e7;
+  margin-top: 2px;
+  padding: 2px;
 }
 
-.game-info {
+%button:hover {
+  background-color: #e7e7e7;
+}
+
+.game {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.gameInfo {
   margin-left: 20px;
+}
+
+.historySelectedButton {
+  @extend %button;
+  font-weight: bold;
+}
+
+.historyIdleButton {
+  @extend %button;
 }
